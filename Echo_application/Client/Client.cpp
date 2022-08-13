@@ -2,6 +2,7 @@
 
 client::Client::Client(client::ConnectionInfo info): ci{std::move(info)}, endpoint{asio::ip::address::from_string(ci.ip)
                                                                                    , ci.port} {
+    asio::io_context::work work(context);
     thr = std::thread([&](){this->context.run();});
 }
 client::Client::~Client(){ thr.join(); }

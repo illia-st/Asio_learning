@@ -1,8 +1,31 @@
-//
-// Created by illia_st on 8/13/22.
-//
+#pragma once
+#include <iostream>
+#include <string>
+#include <vector>
+#include <asio.hpp>
+#include <asio/ts/internet.hpp>
+#include <asio/ts/buffer.hpp>
 
-#ifndef ASIO_LEARNING_SERVER_H
-#define ASIO_LEARNING_SERVER_H
+namespace server {
+    struct ConnectionInfo {
+        std::string ip;
+        uint16_t port;
+    };
+    class Server {
+    public:
+        Server() = delete;
+        Server(ConnectionInfo ci);
+        ~Server();
+        void HandleConnection();
 
-#endif //ASIO_LEARNING_SERVER_H
+
+    private:
+        ConnectionInfo ci;
+        std::vector<char> buffer;
+        asio::ip::tcp::endpoint endpoint;
+        std::thread thr;
+        asio::io_context context;
+        void GrabSomeData(asio::ip::tcp::socket& socket);
+        void SendSomeData(asio::ip::tcp::socket& socket);
+    };
+}

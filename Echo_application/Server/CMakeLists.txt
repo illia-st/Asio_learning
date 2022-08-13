@@ -1,3 +1,6 @@
 set(SERVER Echo_server)
 
-add_executable(${SERVER} "main.cpp")
+add_executable(${SERVER}
+        "main.cpp"
+        "Server.h"
+        "Server.cpp")
