@@ -25,3 +25,5 @@ if(WIN32 AND NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 add_subdirectory(Simple_Example)
+add_subdirectory(Echo_application/Client)
+add_subdirectory(Echo_application/Server)
